@@ -1,0 +1,58 @@
+# =============================================================================
+# local.rules — Custom Suricata IPS Rules
+# Lab: Secure Home Network / Telus PureFibre Wireless Build
+#
+# Place at: /etc/suricata/rules/local.rules
+# Add to /etc/suricata/suricata.yaml rule-files block:
+#   rule-files:
+#     - suricata.rules
+#     - /etc/suricata/rules/local.rules
+#
+# Reload after changes: sudo kill -HUP $(pidof suricata)
+# Verify reload:        sudo tail -f /var/log/suricata/suricata.log
+# =============================================================================
+
+# ── VLAN Lateral Movement Prevention ──────────────────────────────────────────
+#
+# Threat model: A compromised device on the Smart Device Sandbox (VLAN 20)
+# attempts to reach the VIP Vault (VLAN 15). This is the primary east-west
+# lateral movement path. All such traffic is dropped and alerted.
+#
+# MITRE ATT&CK: T1021 — Remote Services (Lateral Movement)
+
+drop ip 10.10.20.0/24 any -> 10.10.15.0/24 any \
+  (msg:"IPS DROP: Lateral Movement Attempt - Smart Device Sandbox to VIP Vault"; \
+   classtype:policy-violation; sid:1000001; rev:1;)
+
+# ── Unauthorized Network Probing — Secure Lab ──────────────────────────────────
+#
+# Threat model: An unmanaged device on the Telus base subnet (192.168.1.0/24)
+# attempts to probe or connect to the Secure Lab VLAN (10). The base Telus
+# subnet is considered untrusted — no device on it should have direct access
+# to lab infrastructure.
+#
+# MITRE ATT&CK: T1046 — Network Service Discovery
+
+drop ip 192.168.1.0/24 any -> 10.10.10.0/24 any \
+  (msg:"IPS DROP: Unauthorized Probe - Telus Base Network to Secure Lab (VLAN 10)"; \
+   classtype:attempted-recon; sid:1000002; rev:1;)
+
+# ── Unauthorized Network Probing — VIP Vault ──────────────────────────────────
+#
+# Threat model: Same as above, targeting the VIP Vault (VLAN 15).
+# The vault holds the most sensitive lab resources and should be reachable
+# only from known trusted VLAN 10 hosts via the WireGuard tunnel.
+#
+# MITRE ATT&CK: T1046 — Network Service Discovery
+
+drop ip 192.168.1.0/24 any -> 10.10.15.0/24 any \
+  (msg:"IPS DROP: Unauthorized Probe - Telus Base Network to VIP Vault (VLAN 15)"; \
+   classtype:attempted-recon; sid:1000003; rev:1;)
+
+# =============================================================================
+# SID allocation:
+#   1000001–1000099: Lateral movement rules
+#   1000100–1000199: Unauthorized probe rules
+#   1000200–1000299: Exfiltration detection (future)
+#   1000300–1000399: C2 detection (future)
+# =============================================================================
