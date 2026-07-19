@@ -1,13 +1,45 @@
-# 🔒 Secure Home Network Lab — Telus PureFibre / Wireless-Only Build
+> [!IMPORTANT]
+> ## 📦 Legacy Engineering Portfolio Project
+>
+> This repository documents one of the infrastructure engineering projects I completed while developing my home lab.
+>
+> Rather than deleting or replacing it, I have intentionally preserved it as part of my **Legacy Project Archive** to document my growth as an infrastructure and cybersecurity engineer.
+>
+> This project demonstrates the design and implementation of a software-defined network security architecture using Ubuntu Server, Suricata IDS/IPS, WireGuard VPN, Wazuh SIEM, and layered Linux security controls.
+>
+> Every engineering decision, deployment issue, troubleshooting step, and lesson learned has been preserved to document the engineering process—not just the finished solution.
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-![Phase](https://img.shields.io/badge/Phase-2%20Complete-blue)
+# 🛡️ Software-Defined Network Security Infrastructure
+
+## Enterprise-Inspired Security Architecture Using Ubuntu Server, Suricata, WireGuard, and Wazuh
+
+![Status](https://img.shields.io/badge/Status-Legacy_Project-6f42c1)
+![Portfolio](https://img.shields.io/badge/Portfolio-Historical_Engineering_Project-blue)
 ![Suricata](https://img.shields.io/badge/Suricata-8.0.5-orange)
 ![WireGuard](https://img.shields.io/badge/WireGuard-VPN-blueviolet)
 ![Wazuh](https://img.shields.io/badge/Wazuh-SIEM-teal)
 ![Security+](https://img.shields.io/badge/CompTIA-Security%2B%20SY0--701-red)
 
-> **A fully wireless, software-defined network security lab built on a locked Telus PureFibre ISP router — no managed switch, no pfSense, no hardware VLANs. All segmentation, IPS enforcement, and VPN tunnelling achieved entirely in software on a single Linux host.**
+---
+
+## Project Overview
+
+This project demonstrates how enterprise-inspired network security can be implemented using consumer networking hardware and open-source security technologies. It documents the complete engineering process, from architecture and deployment through validation, troubleshooting, incident response, and lessons learned.
+
+---
+
+## 📊 Project at a Glance
+
+| Category | Details |
+|---|---|
+| Project Type | Infrastructure & Network Security Engineering |
+| Status | Legacy Portfolio Project |
+| Platform | Ubuntu Server 22.04 LTS |
+| Security Stack | Suricata • WireGuard • Wazuh • UFW |
+| Documentation | Complete |
+| Incident Reports | 4 |
+| MITRE ATT&CK Mapping | Included |
+| Security+ Mapping | Included |
 
 ---
 
@@ -57,7 +89,7 @@ TELUS PUREFIBR ISP
 
 ---
 
-## What This Lab Demonstrates
+## Engineering Capabilities Demonstrated
 
 | Skill | Implementation |
 |---|---|
@@ -345,3 +377,28 @@ home-lab-network-security/
     ├── 14-ir002-wazuh-queue-flood.png
     └── 15-ip-route-default.png
 ```
+
+
+---
+
+# Engineering Philosophy
+
+Every project in my Legacy Project Archive has been preserved intentionally to demonstrate the complete engineering lifecycle, including planning, implementation, troubleshooting, validation, and continuous improvement.
+
+---
+
+# Current Engineering Focus
+
+- 🛡️ Cyber Operations Center Engineering Program *(Flagship Project)*
+- 🏗️ Project Atlas
+- 🐉 Project Hydra
+- 🏛️ Project Olympus
+- 🔥 Project Hestia
+
+---
+
+## Author
+
+**Scott Renny**
+
+Aspiring SOC Analyst • Infrastructure Engineer • Home Lab Builder
