@@ -3,7 +3,7 @@
 **Date:** 2026-06-19
 **Severity:** Informational
 **Status:** Closed — Expected Behaviour
-**System:** homelabserver — WireGuard / filesystem permissions
+**System:** legacy-lab-host — WireGuard / filesystem permissions
 
 ---
 
