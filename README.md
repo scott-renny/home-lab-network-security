@@ -393,9 +393,11 @@ Every project in my Legacy Project Archive has been preserved intentionally to d
 
 - 🛡️ Cyber Operations Center Engineering Program *(Flagship Project)*
 - 🏗️ Project Atlas
-- 🐉 Project Hydra
-- 🏛️ Project Olympus
-- 🔥 Project Hestia
+- 📡 [NET-WATCH](https://github.com/scott-renny/netwatch)
+- 🪖 [Project Hermes](https://github.com/scott-renny/project-hermes)
+- 🐺 [Project Cerberus](https://github.com/scott-renny/project-cerberus-build)
+- ⚔️ [Project Ares](https://github.com/scott-renny/project_ares)
+- ☀️ [Project Apollo](https://github.com/scott-renny/project-apollo)
 
 ---
 
@@ -403,4 +405,4 @@ Every project in my Legacy Project Archive has been preserved intentionally to d
 
 **Scott Renny**
 
-Aspiring SOC Analyst • Infrastructure Engineer • Home Lab Builder
+Security+ Certified • Cybersecurity and Infrastructure Engineering
