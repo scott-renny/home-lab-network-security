@@ -3,7 +3,7 @@
 **Date:** 2026-06-21
 **Severity:** Low
 **Status:** Resolved
-**System:** homelabserver — Suricata 8.0.5
+**System:** legacy-lab-host — Suricata 8.0.5
 
 ---
 
