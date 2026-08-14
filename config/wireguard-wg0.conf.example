@@ -20,7 +20,7 @@
 PrivateKey = <YOUR_SERVER_PRIVATE_KEY>
 
 # IP address of this server on the VPN network
-Address = 10.10.30.1/24
+Address = 198.51.100.193/26
 
 # WireGuard listens on this UDP port
 ListenPort = 51820

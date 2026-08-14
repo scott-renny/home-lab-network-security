@@ -3,7 +3,7 @@
 **Date:** 2026-06-19 to 2026-06-21
 **Severity:** High
 **Status:** Resolved
-**System:** homelabserver — Wazuh Agent
+**System:** legacy-lab-host — Wazuh Agent
 
 ---
 

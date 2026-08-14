@@ -17,9 +17,9 @@ PARENT_IFACE="wlp2s0"          # Your wireless NIC — change this if needed
  
 # VLAN definitions: "ID:NAME:IP_PREFIX"
 VLANS=(
-  "10:vlan10_secure_lab:10.10.10.1/24"
-  "15:vlan15_vip_vault:10.10.15.1/24"
-  "20:vlan20_smart_sandbox:10.10.20.1/24"
+  "10:vlan10_secure_lab:198.51.100.1/26"
+  "15:vlan15_vip_vault:198.51.100.65/26"
+  "20:vlan20_smart_sandbox:198.51.100.129/26"
 )
 # ──────────────────────────────────────────────────────────────────────────────
  

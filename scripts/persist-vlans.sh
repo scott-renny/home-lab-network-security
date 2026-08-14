@@ -31,17 +31,17 @@ network:
     ${PARENT_IFACE}.10:
       id: 10
       link: ${PARENT_IFACE}
-      addresses: [10.10.10.1/24]
+      addresses: [198.51.100.1/26]
  
     ${PARENT_IFACE}.15:
       id: 15
       link: ${PARENT_IFACE}
-      addresses: [10.10.15.1/24]
+      addresses: [198.51.100.65/26]
  
     ${PARENT_IFACE}.20:
       id: 20
       link: ${PARENT_IFACE}
-      addresses: [10.10.20.1/24]
+      addresses: [198.51.100.129/26]
 EOF
  
 chmod 600 "$NETPLAN_FILE"

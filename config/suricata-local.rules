@@ -20,20 +20,20 @@
 #
 # MITRE ATT&CK: T1021 — Remote Services (Lateral Movement)
 
-drop ip 10.10.20.0/24 any -> 10.10.15.0/24 any \
+drop ip 198.51.100.128/26 any -> 198.51.100.64/26 any \
   (msg:"IPS DROP: Lateral Movement Attempt - Smart Device Sandbox to VIP Vault"; \
    classtype:policy-violation; sid:1000001; rev:1;)
 
 # ── Unauthorized Network Probing — Secure Lab ──────────────────────────────────
 #
-# Threat model: An unmanaged device on the Telus base subnet (192.168.1.0/24)
+# Threat model: An unmanaged device on the Telus base subnet (192.0.2.0/24)
 # attempts to probe or connect to the Secure Lab VLAN (10). The base Telus
 # subnet is considered untrusted — no device on it should have direct access
 # to lab infrastructure.
 #
 # MITRE ATT&CK: T1046 — Network Service Discovery
 
-drop ip 192.168.1.0/24 any -> 10.10.10.0/24 any \
+drop ip 192.0.2.0/24 any -> 198.51.100.0/26 any \
   (msg:"IPS DROP: Unauthorized Probe - Telus Base Network to Secure Lab (VLAN 10)"; \
    classtype:attempted-recon; sid:1000002; rev:1;)
 
@@ -45,7 +45,7 @@ drop ip 192.168.1.0/24 any -> 10.10.10.0/24 any \
 #
 # MITRE ATT&CK: T1046 — Network Service Discovery
 
-drop ip 192.168.1.0/24 any -> 10.10.15.0/24 any \
+drop ip 192.0.2.0/24 any -> 198.51.100.64/26 any \
   (msg:"IPS DROP: Unauthorized Probe - Telus Base Network to VIP Vault (VLAN 15)"; \
    classtype:attempted-recon; sid:1000003; rev:1;)
 
