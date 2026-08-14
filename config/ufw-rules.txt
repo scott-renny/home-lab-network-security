@@ -1,0 +1,46 @@
+# =============================================================================
+# ufw-rules.txt — Firewall Rule Documentation
+# Lab: Secure Home Network / Telus PureFibre Wireless Build
+#
+# Generated from: sudo ufw status verbose
+# =============================================================================
+ 
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+ 
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere        # SSH admin access
+80/tcp                     ALLOW IN    Anywhere        # HTTP
+443/tcp                    ALLOW IN    Anywhere        # HTTPS / Wazuh dashboard
+8081/tcp                   ALLOW IN    Anywhere        # Lab services
+53/udp                     ALLOW IN    Anywhere        # DNS
+137,138/udp (Samba)        ALLOW IN    Anywhere        # Samba file sharing
+139,445/tcp (Samba)        ALLOW IN    Anywhere        # Samba file sharing
+ 
+# IPv6 equivalents (same rules)
+22/tcp (v6)                ALLOW IN    Anywhere (v6)
+80/tcp (v6)                ALLOW IN    Anywhere (v6)
+443/tcp (v6)               ALLOW IN    Anywhere (v6)
+8081/tcp (v6)              ALLOW IN    Anywhere (v6)
+53/udp (v6)                ALLOW IN    Anywhere (v6)
+137,138/udp (Samba (v6))   ALLOW IN    Anywhere (v6)
+139,445/tcp (Samba (v6))   ALLOW IN    Anywhere (v6)
+ 
+# =============================================================================
+# To apply these rules on a fresh install:
+# =============================================================================
+ 
+# sudo ufw default deny incoming
+# sudo ufw default allow outgoing
+# sudo ufw default deny routed
+# sudo ufw allow 22/tcp
+# sudo ufw allow 80/tcp
+# sudo ufw allow 443/tcp
+# sudo ufw allow 8081/tcp
+# sudo ufw allow 53/udp
+# sudo ufw allow Samba
+# sudo ufw enable
+# sudo ufw status verbose
