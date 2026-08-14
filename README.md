@@ -8,6 +8,8 @@
 > This project demonstrates the design and implementation of a software-defined network security architecture using Ubuntu Server, Suricata IDS/IPS, WireGuard VPN, Wazuh SIEM, and layered Linux security controls.
 >
 > Every engineering decision, deployment issue, troubleshooting step, and lesson learned has been preserved to document the engineering process—not just the finished solution.
+>
+> Addresses shown in this legacy record are sanitized documentation examples and are not the current production topology.
 
 # 🛡️ Software-Defined Network Security Infrastructure
 
@@ -62,15 +64,15 @@ This project demonstrates how enterprise-inspired network security can be implem
 ```
 TELUS PUREFIBR ISP
         │
-   192.168.1.254 (Telus T3200M — locked, no VLAN support)
+   192.0.2.254 (Telus T3200M — locked, no VLAN support)
         │
    wlp2s0 (Wi-Fi NIC — Linux host)
         │
    ┌────┴────────────────────────────────┐
    │         802.1q VLAN Subinterfaces   │
-   │  wlp2s0.10  →  10.10.10.0/24       │  VLAN 10: Secure Lab
-   │  wlp2s0.15  →  10.10.15.0/24       │  VLAN 15: VIP Vault
-   │  wlp2s0.20  →  10.10.20.0/24       │  VLAN 20: Smart Device Sandbox
+   │  wlp2s0.10  →  198.51.100.0/26       │  VLAN 10: Secure Lab
+   │  wlp2s0.15  →  198.51.100.64/26       │  VLAN 15: VIP Vault
+   │  wlp2s0.20  →  198.51.100.128/26       │  VLAN 20: Smart Device Sandbox
    └─────────────────────────────────────┘
         │
    iptables NFQUEUE → Suricata 8.0.5 (IPS/NFQ mode)
@@ -80,7 +82,7 @@ TELUS PUREFIBR ISP
    ├── DROP: Telus subnet → VLAN 10 (unauthorized probe)
    └── DROP: Telus subnet → VLAN 15 (unauthorized probe)
         │
-   WireGuard wg0 (10.10.30.0/24) — encrypted VPN tunnel
+   WireGuard wg0 (198.51.100.192/26) — encrypted VPN tunnel
         │
    Wazuh SIEM — centralized alerting + MITRE ATT&CK mapping
 ```
@@ -160,9 +162,9 @@ sudo ip link set dev wlp2s0.20 up
 ### Step 4 — Assign IP addresses and verify
 
 ```bash
-sudo ip addr add 10.10.10.1/24 dev wlp2s0.10
-sudo ip addr add 10.10.15.1/24 dev wlp2s0.15
-sudo ip addr add 10.10.20.1/24 dev wlp2s0.20
+sudo ip addr add 198.51.100.1/26 dev wlp2s0.10
+sudo ip addr add 198.51.100.65/26 dev wlp2s0.15
+sudo ip addr add 198.51.100.129/26 dev wlp2s0.20
 ip addr show | grep -E "wlp2s0\.|inet"
 ```
 
@@ -180,10 +182,10 @@ ip route | grep default
 
 | VLAN | Interface | Subnet | Purpose | Trust Level |
 |---|---|---|---|---|
-| 10 | wlp2s0.10 | 10.10.10.0/24 | Secure Lab | High |
-| 15 | wlp2s0.15 | 10.10.15.0/24 | VIP Vault | Critical |
-| 20 | wlp2s0.20 | 10.10.20.0/24 | Smart Device Sandbox | Untrusted |
-| — | wlp2s0 | 192.168.1.x | Telus base network | Untrusted |
+| 10 | wlp2s0.10 | 198.51.100.0/26 | Secure Lab | High |
+| 15 | wlp2s0.15 | 198.51.100.64/26 | VIP Vault | Critical |
+| 20 | wlp2s0.20 | 198.51.100.128/26 | Smart Device Sandbox | Untrusted |
+| — | wlp2s0 | 192.0.2.x | Telus base network | Untrusted |
 
 ### Firewall (UFW)
 
@@ -222,11 +224,11 @@ suricata -V
 
 ```bash
 sudo tee /etc/suricata/rules/local.rules << 'EOF'
-drop ip 10.10.20.0/24 any -> 10.10.15.0/24 any \
+drop ip 198.51.100.128/26 any -> 198.51.100.64/26 any \
   (msg:"IPS DROP: Lateral Movement Attempt - Smart Device to VIP Vault"; sid:1000001; rev:1;)
-drop ip 192.168.1.0/24 any -> 10.10.10.0/24 any \
+drop ip 192.0.2.0/24 any -> 198.51.100.0/26 any \
   (msg:"IPS DROP: Unauthorized Probe - Base Network to Secure Lab"; sid:1000002; rev:1;)
-drop ip 192.168.1.0/24 any -> 10.10.15.0/24 any \
+drop ip 192.0.2.0/24 any -> 198.51.100.64/26 any \
   (msg:"IPS DROP: Unauthorized Probe - Base Network to VIP Vault"; sid:1000003; rev:1;)
 EOF
 ```
